@@ -1,0 +1,118 @@
+export const SITE = {
+  name: "VibeOps Forum",
+  domain: "vibeopsforum.com",
+  url: "https://vibeopsforum.com",
+  description:
+    "A builder community for AI-native development, agent operations, A2A protocol work, and MCP tooling.",
+  slackUrl:
+    "https://join.slack.com/t/vibeopsforum/shared_invite/zt-40mvrfmy8-gqycEL7G~Q2tB5KuNW8tBQ",
+  joinUrl: "/join/",
+  githubUrl: "https://github.com/seefor/vibeopsforum",
+  ogImage: "/og-default.png",
+  projectShelfSubmitUrl:
+    "https://github.com/seefor/vibeopsforum/issues/new?template=project-shelf",
+  communityContentSubmitUrl:
+    "https://github.com/seefor/vibeopsforum/issues/new?template=community-content",
+  eventSubmitUrl:
+    "https://github.com/seefor/vibeopsforum/issues/new?template=event-submission",
+};
+
+export const navItems = [
+  { href: "/about/", label: "About" },
+  { href: "/events/", label: "Events" },
+  { href: "/meeting-registration/", label: "Meetings" },
+  { href: "/resources/", label: "Resources" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/discussions/", label: "Discussions" },
+  { href: "/community/", label: "Community Content" },
+];
+
+// Display order + labels for the project directory groupings.
+export const projectCategories = {
+  netclaw: {
+    label: "NetClaw Ecosystem",
+    description: "The flagship network-ops agent and the projects orbiting it.",
+  },
+  frameworks: {
+    label: "Agent Frameworks & Harnesses",
+    description: "Runtimes, harnesses, and orchestration patterns for autonomous agents.",
+  },
+  mcp: {
+    label: "MCP Servers & Tools",
+    description: "Model Context Protocol servers and tooling for wiring models to real systems.",
+  },
+  networking: {
+    label: "Networking & Infra",
+    description: "Labs, DDI, and workshop material for AI-native network operations.",
+  },
+  research: {
+    label: "Models & Research",
+    description: "Foundation models, tokenization research, and learning resources.",
+  },
+  community: {
+    label: "Community & Site",
+    description: "The forum's own repos and related community skeletons.",
+  },
+} as const;
+
+export type ProjectCategory = keyof typeof projectCategories;
+
+export const communityContentTypes = {
+  all: { label: "All", kicker: "Everything" },
+  youtube: { label: "YouTube", kicker: "Video" },
+  podcast: { label: "Podcasts", kicker: "Audio" },
+  blog: { label: "Blogs", kicker: "Writing" },
+} as const;
+
+export const topics = [
+  {
+    label: "Vibecoding",
+    href: "/resources/vibecoding/",
+    kicker: "AI-assisted product work",
+    description:
+      "Patterns for planning, prompting, reviewing, and shipping software with coding agents.",
+  },
+  {
+    label: "Agent Operations",
+    href: "/resources/agent-operations/",
+    kicker: "Autonomous workflows",
+    description:
+      "How teams run agents in production workflows with handoffs, guardrails, and review loops.",
+  },
+  {
+    label: "A2A Protocol",
+    href: "/resources/a2a-protocol/",
+    kicker: "Agent interoperability",
+    description:
+      "Practical notes on agent discovery, messaging, delegation, and multi-agent systems.",
+  },
+  {
+    label: "MCP Tooling",
+    href: "/resources/mcp-tooling/",
+    kicker: "Tools for model context",
+    description:
+      "Servers, clients, schemas, and security practices for connecting models to real systems.",
+  },
+];
+
+export function formatDate(date: Date) {
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+
+export function formatEventTime(date: Date, timezone: string) {
+  return new Intl.DateTimeFormat("en", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: timezone,
+    timeZoneName: "short",
+  }).format(date);
+}
+
+export function isActiveNav(href: string, pathname: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href.slice(0, -1));
+}

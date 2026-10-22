@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+
+const resources = (await getCollection("resources")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="AI Builder Resources"
+  description="Read VibeOps Forum primers on vibecoding, agent operations, A2A protocol, and MCP tooling."
+>
+  <section class="shell py-20">
+    <PageHero
+      kicker="Resources"
+      title="A field guide for AI builders."
+      description="These pages give newcomers a shared vocabulary before they join the Slack conversation. They are intentionally practical and meant to grow from community examples."
+    />
+
+    <div class="mt-14 grid gap-5 md:grid-cols-2">
+      {resources.map((resource) => (
+        <a href={`/resources/${resource.id}/`} class="group glass rounded-2xl p-6">
+          <p class="mono text-xs uppercase tracking-[0.22em] text-[#38e8ff]">{resource.data.topic}</p>
+          <h2 class="mt-4 text-2xl font-bold tracking-[-0.04em] text-white group-hover:text-[#b9f7ff]">{resource.data.title}</h2>
+          <p class="mt-3 text-sm leading-6 text-[#cdb8c4]">{resource.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
